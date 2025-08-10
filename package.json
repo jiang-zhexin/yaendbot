@@ -1,0 +1,30 @@
+{
+	"name": "yaendbot",
+	"version": "0.0.0",
+	"private": true,
+	"scripts": {
+		"deploy": "wrangler deploy",
+		"dev": "wrangler dev",
+		"types": "wrangler types",
+		"push": "drizzle-kit push",
+		"setWebhook": "bun run ./scripts/setWebhook.ts",
+		"setCommand": "bun run ./scripts/setCommand.ts"
+	},
+	"devDependencies": {
+		"@cloudflare/workers-types": "^4.20250810.0",
+		"@types/node": "^24.2.1",
+		"dotenv": "^17.2.1",
+		"drizzle-kit": "^0.31.4",
+		"typescript": "^5.9.2",
+		"wrangler": "^4.28.1"
+	},
+	"dependencies": {
+		"@ai-sdk/gateway": "^1.0.4",
+		"ai": "^5.0.8",
+		"drizzle-orm": "^0.44.4",
+		"grammy": "^1.37.0",
+		"hono": "^4.9.0",
+		"marked": "^16.1.2",
+		"zod": "^4.0.17"
+	}
+}
