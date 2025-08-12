@@ -5,6 +5,8 @@ import { env } from "cloudflare:workers";
 import { msg } from "./msg";
 import { log } from "./log";
 import { chat } from "./chat";
+//@ts-ignore
+import robots from "./robots.txt";
 
 const bot = new Bot(env.BOT_TOKEN, { botInfo: env.BOT_INFO });
 bot.use(log);
@@ -21,6 +23,10 @@ app.post("/", async (c) => {
     console.error(err);
     return new Response(null, { status: 200 });
   });
+});
+
+app.get("/robots.txt", async (c) => {
+  return c.text(robots);
 });
 
 app.get("/download/:type/:path", async (c) => {
