@@ -10,7 +10,13 @@
 		],
 		"types": [
 			"./worker-configuration.d.ts",
-			"node"
-		]
+		],
 	},
+	"exclude": [
+		"scripts"
+	],
+	"include": [
+		"worker-configuration.d.ts",
+		"src/**/*.ts"
+	]
 }

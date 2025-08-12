@@ -52,7 +52,7 @@ chat
   .on("msg:text")
   .filter((c) => c.msg.reply_to_message?.from?.id === c.me.id, handler);
 
-const gateway = createGateway({ apiKey: process.env.AI_GATEWAY_API_KEY });
+const gateway = createGateway({ apiKey: env.AI_GATEWAY_API_KEY });
 
 async function handler(c: Filter<Context, ":text">) {
   c.replyWithChatAction("typing");
@@ -86,7 +86,6 @@ async function handler(c: Filter<Context, ":text">) {
   const messages = result.map((c) => format(c));
   messages.unshift({ role: "system", content: systemPrompt });
 
-  const start = performance.now();
   const r = await generateText({
     model: gateway("google/gemini-2.0-flash"),
     messages: messages,
@@ -106,7 +105,6 @@ async function handler(c: Filter<Context, ":text">) {
         }),
         execute: async ({ photo_id }) => {
           const photo = await c.api.getFile(photo_id);
-          console.log(`function getPhoto calling from ${photo_id}`);
           return `${env.WEBHOOK}/download/${photo.file_path!}`;
         },
       }),
@@ -117,7 +115,6 @@ async function handler(c: Filter<Context, ":text">) {
         }),
         execute: async ({ url }) => {
           const resp = await fetch(`https://r.jina.ai/${url}`);
-          console.log(`function fetchContentFromURL calling from ${url}`);
           return resp.text();
         },
       }),
@@ -141,8 +138,8 @@ async function handler(c: Filter<Context, ":text">) {
     else await c.reply(JSON.stringify(err));
     throw err;
   });
-  const end = performance.now();
-  console.log({ steps: r.steps, time: `${(end - start) / 1000}s` });
+
+  console.log({ steps: r.steps });
   if (r.finishReason !== "stop") {
     throw r.finishReason;
   }
