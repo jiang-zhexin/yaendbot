@@ -1,15 +1,12 @@
 import { Composer } from "grammy";
-import { drizzle } from "drizzle-orm/d1";
-import { env } from "cloudflare:workers";
 
+import { db } from "./db/db";
 import { chatTable } from "./db/schema";
 import { getUsernameFromOrigin, getUsernameFromUser } from "./utils/username";
 
 export const msg = new Composer();
 
 msg.on(["edit:text", "msg:text", "msg:photo"], async (c, next) => {
-  const db = drizzle(env.DB);
-
   const chatMsg: typeof chatTable.$inferInsert = {
     chat_id: c.chatId,
     date: c.msg.date,

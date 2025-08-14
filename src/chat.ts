@@ -1,5 +1,4 @@
 import { Composer, Context, Filter } from "grammy";
-import { drizzle } from "drizzle-orm/d1";
 import { eq, and, gt } from "drizzle-orm";
 import { alias } from "drizzle-orm/sqlite-core";
 import {
@@ -13,6 +12,7 @@ import { createGateway } from "@ai-sdk/gateway";
 import * as z from "zod/v4";
 import { env } from "cloudflare:workers";
 
+import { db } from "./db/db";
 import { chatTable } from "./db/schema";
 import { Markdown } from "./utils/markdown";
 
@@ -55,7 +55,6 @@ const gateway = createGateway({ apiKey: env.AI_GATEWAY_API_KEY });
 async function handler(c: Filter<Context, ":text">) {
   c.replyWithChatAction("typing");
 
-  const db = drizzle(env.DB, { schema: { chatTable } });
   const repliedMessage = alias(chatTable, "replied_message");
   const now = Math.floor(performance.now() / 1000) - 300;
   const result: fullMsg[] = await db

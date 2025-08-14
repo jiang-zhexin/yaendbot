@@ -1,8 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "yaendbot"
 main = "src/index.ts"
-compatibility_date = "2025-08-09"
-compatibility_flags = ["nodejs_compat"]
+compatibility_date = "2025-08-14"
 minify = true
 upload_source_maps = true
 preview_urls = false
@@ -11,6 +10,9 @@ preview_urls = false
 binding = "DB"
 database_name = "yaendbot"
 database_id = "a6220646-5813-4be2-82ad-1e7f94374295"
+
+[placement]
+mode = "smart"
 
 [observability]
 enabled = true
