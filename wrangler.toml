@@ -1,7 +1,7 @@
 #:schema node_modules/wrangler/config-schema.json
 name = "yaendbot"
 main = "src/index.ts"
-compatibility_date = "2025-08-14"
+compatibility_date = "2025-08-15"
 minify = true
 upload_source_maps = true
 preview_urls = false
