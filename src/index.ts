@@ -32,7 +32,7 @@ app.get("/robots.txt", async (c) => {
 app.get("/download/:type/:path", async (c) => {
   const { type, path } = c.req.param();
   return fetch(
-    `https://api.telegram.org/file/bot${env.BOT_TOKEN}/${type}/${path}`
+    `https://api.telegram.org/file/bot${env.BOT_TOKEN}/${type}/${path}`,
   );
 });
 

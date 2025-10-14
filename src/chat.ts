@@ -1,12 +1,12 @@
 import { Composer, Context, Filter } from "grammy";
-import { eq, and, gt } from "drizzle-orm";
+import { and, eq, gt } from "drizzle-orm";
 import { alias } from "drizzle-orm/sqlite-core";
 import {
   generateText,
-  tool,
-  stepCountIs,
-  type ModelMessage,
   type ImagePart,
+  type ModelMessage,
+  stepCountIs,
+  tool,
 } from "ai";
 import { createGateway } from "@ai-sdk/gateway";
 import * as z from "zod/v4";
@@ -16,7 +16,8 @@ import { db } from "./db/db";
 import { chatTable } from "./db/schema";
 import { Markdown } from "./utils/markdown";
 
-const systemPrompt = `你需要扮演一个 telegram bot，你的输出将直接作为 bot 的消息发送。
+const systemPrompt =
+  `你需要扮演一个 telegram bot，你的输出将直接作为 bot 的消息发送。
 
 你的用户名是 Yet Another End Bot。
 
@@ -75,8 +76,8 @@ async function handler(c: Filter<Context, ":text">) {
       repliedMessage,
       and(
         eq(chatTable.reply_chat_id, repliedMessage.chat_id),
-        eq(chatTable.reply_message_id, repliedMessage.message_id)
-      )
+        eq(chatTable.reply_message_id, repliedMessage.message_id),
+      ),
     )
     .where(and(eq(chatTable.chat_id, c.chatId), gt(chatTable.date, now)));
 

@@ -1,9 +1,9 @@
 import {
+  index,
   int,
+  primaryKey,
   sqliteTable,
   text,
-  index,
-  primaryKey,
 } from "drizzle-orm/sqlite-core";
 
 export const chatTable = sqliteTable(
@@ -24,5 +24,5 @@ export const chatTable = sqliteTable(
   (table) => [
     primaryKey({ columns: [table.chat_id, table.message_id] }),
     index("date_idx").on(table.date),
-  ]
+  ],
 );

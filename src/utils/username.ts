@@ -1,7 +1,7 @@
 import { MessageOrigin, User } from "grammy/types";
 
 export function getUsernameFromUser(
-  user: User | undefined
+  user: User | undefined,
 ): string | undefined {
   if (user === undefined) {
     return;

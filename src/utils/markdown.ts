@@ -27,7 +27,7 @@ function format(tokens: Token[], offset: number = 0): result {
             offset: offset,
             length: r.text.length,
           },
-          ...r.entities
+          ...r.entities,
         );
         result.text += r.text;
         offset += r.text.length;
@@ -45,7 +45,7 @@ function format(tokens: Token[], offset: number = 0): result {
             offset: offset,
             length: r.text.length,
           },
-          ...r.entities
+          ...r.entities,
         );
         result.text += r.text + "\n\n";
         offset += r.text.length + 2;
@@ -64,7 +64,7 @@ function format(tokens: Token[], offset: number = 0): result {
             offset: offset,
             length: r.text.length,
           },
-          ...r.entities
+          ...r.entities,
         );
         result.text += r.text;
         offset += r.text.length;
@@ -82,7 +82,7 @@ function format(tokens: Token[], offset: number = 0): result {
             offset: offset,
             length: r.text.length,
           },
-          ...r.entities
+          ...r.entities,
         );
         result.text += r.text;
         offset += r.text.length;
@@ -101,7 +101,7 @@ function format(tokens: Token[], offset: number = 0): result {
             length: r.text.length,
             url: token.href,
           },
-          ...r.entities
+          ...r.entities,
         );
         result.text += r.text;
         offset += r.text.length;
@@ -110,15 +110,15 @@ function format(tokens: Token[], offset: number = 0): result {
       case "list": {
         const pre = token.ordered
           ? (function* (num: number) {
-              while (true) {
-                yield `${num++}. `;
-              }
-            })(token.start)
+            while (true) {
+              yield `${num++}. `;
+            }
+          })(token.start)
           : (function* () {
-              while (true) {
-                yield "• ";
-              }
-            })();
+            while (true) {
+              yield "• ";
+            }
+          })();
         for (const t of token.items as Tokens.ListItem[]) {
           const p = pre.next().value;
           const r = format(t.tokens, offset + p.length);

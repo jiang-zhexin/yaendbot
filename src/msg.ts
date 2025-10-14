@@ -55,7 +55,7 @@ msg.on(["edit:text", "msg:text", "msg:photo"], async (c, next) => {
       replyMsg.file_id = c.msg.external_reply.photo.at(-1)!.file_id;
     }
     replyMsg.from_user_name = getUsernameFromOrigin(
-      c.msg.external_reply.origin
+      c.msg.external_reply.origin,
     );
     replyMsg.message = c.msg.quote?.text;
     isreply = true;
@@ -78,7 +78,7 @@ msg.on(["edit:text", "msg:text", "msg:photo"], async (c, next) => {
         }),
       db.insert(chatTable).values(replyMsg).onConflictDoNothing(),
     ]);
-  } else
+  } else {
     await db
       .insert(chatTable)
       .values(chatMsg)
@@ -89,6 +89,7 @@ msg.on(["edit:text", "msg:text", "msg:photo"], async (c, next) => {
           from_user_name: chatMsg.from_user_name,
         },
       });
+  }
 
   await next();
 });
