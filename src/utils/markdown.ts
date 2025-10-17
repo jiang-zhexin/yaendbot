@@ -1,4 +1,4 @@
-import { MessageEntity } from "grammy/types";
+import type { MessageEntity } from "grammy/types";
 import { lexer, type Token, type Tokens } from "marked";
 
 type result = {

@@ -1,4 +1,4 @@
-import { MessageOrigin, User } from "grammy/types";
+import type { MessageOrigin, User } from "grammy/types";
 
 export function getUsernameFromUser(
   user: User | undefined,

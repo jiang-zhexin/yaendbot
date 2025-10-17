@@ -28,7 +28,7 @@ msg.on(["edit:text", "msg:text", "msg:photo"], async (c, next) => {
   if (c.msg.photo) {
     chatMsg.message_type = "photo";
     chatMsg.message = c.msg.caption;
-    chatMsg.file_id = c.msg.photo[0].file_id;
+    chatMsg.file_id = c.msg.photo.at(0)?.file_id;
   }
 
   if (c.msg.reply_to_message) {
