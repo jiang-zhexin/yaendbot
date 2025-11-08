@@ -13,6 +13,7 @@ database_id = "a6220646-5813-4be2-82ad-1e7f94374295"
 
 [observability]
 enabled = true
+traces.enabled = true
 
 [vars.BOT_INFO]
 id = 7913290545
